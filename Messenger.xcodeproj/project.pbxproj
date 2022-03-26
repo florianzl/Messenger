@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170D7B4627ECE97E00E874C6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170D7B4527ECE97E00E874C6 /* CloudKit.framework */; };
+		17C0CBA227EFB6CB0023404A /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0CBA127EFB6CB0023404A /* ImageView.swift */; };
+		17C0CBAA27EFB7150023404A /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0CBA927EFB7150023404A /* ChatBubble.swift */; };
+		17C0CBAC27EFB71E0023404A /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0CBAB27EFB71E0023404A /* ChatRow.swift */; };
+		17C0CBAE27EFB75E0023404A /* GlobalChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0CBAD27EFB75E0023404A /* GlobalChatView.swift */; };
+		17C0CBB127EFC32F0023404A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0CBB027EFC32F0023404A /* ProfileView.swift */; };
+		17C0CBB627EFC5DB0023404A /* TabHandlerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0CBB527EFC5DB0023404A /* TabHandlerView.swift */; };
 		17FCDC5E27E2820900D34564 /* MessengerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FCDC5D27E2820900D34564 /* MessengerApp.swift */; };
 		17FCDC6027E2820900D34564 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FCDC5F27E2820900D34564 /* ContentView.swift */; };
 		17FCDC6227E2820A00D34564 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FCDC6127E2820A00D34564 /* Assets.xcassets */; };
@@ -14,6 +21,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		170D7B4327ECE94200E874C6 /* Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Messenger.entitlements; sourceTree = "<group>"; };
+		170D7B4527ECE97E00E874C6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		17C0CBA127EFB6CB0023404A /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		17C0CBA927EFB7150023404A /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
+		17C0CBAB27EFB71E0023404A /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
+		17C0CBAD27EFB75E0023404A /* GlobalChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GlobalChatView.swift; path = Messenger/Views/Chat/Global/GlobalChatView.swift; sourceTree = SOURCE_ROOT; };
+		17C0CBB027EFC32F0023404A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		17C0CBB527EFC5DB0023404A /* TabHandlerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabHandlerView.swift; sourceTree = "<group>"; };
 		17FCDC5A27E2820900D34564 /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17FCDC5D27E2820900D34564 /* MessengerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerApp.swift; sourceTree = "<group>"; };
 		17FCDC5F27E2820900D34564 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -26,17 +41,65 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				170D7B4627ECE97E00E874C6 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		170D7B4427ECE97E00E874C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				170D7B4527ECE97E00E874C6 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		17C0CBA027EFB66E0023404A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				17FCDC5F27E2820900D34564 /* ContentView.swift */,
+				17C0CBAF27EFC2E80023404A /* Profile */,
+				17C0CBB327EFC59D0023404A /* Chat */,
+				17C0CBB527EFC5DB0023404A /* TabHandlerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		17C0CBAF27EFC2E80023404A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				17C0CBA127EFB6CB0023404A /* ImageView.swift */,
+				17C0CBB027EFC32F0023404A /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		17C0CBB327EFC59D0023404A /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				17C0CBA927EFB7150023404A /* ChatBubble.swift */,
+				17C0CBAB27EFB71E0023404A /* ChatRow.swift */,
+				17C0CBB427EFC5B30023404A /* Global */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		17C0CBB427EFC5B30023404A /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				17C0CBAD27EFB75E0023404A /* GlobalChatView.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		17FCDC5127E2820900D34564 = {
 			isa = PBXGroup;
 			children = (
 				17FCDC5C27E2820900D34564 /* Messenger */,
 				17FCDC5B27E2820900D34564 /* Products */,
+				170D7B4427ECE97E00E874C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,8 +114,9 @@
 		17FCDC5C27E2820900D34564 /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				17C0CBA027EFB66E0023404A /* Views */,
+				170D7B4327ECE94200E874C6 /* Messenger.entitlements */,
 				17FCDC5D27E2820900D34564 /* MessengerApp.swift */,
-				17FCDC5F27E2820900D34564 /* ContentView.swift */,
 				17FCDC6127E2820A00D34564 /* Assets.xcassets */,
 				17FCDC6327E2820A00D34564 /* Preview Content */,
 			);
@@ -137,8 +201,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17C0CBAC27EFB71E0023404A /* ChatRow.swift in Sources */,
+				17C0CBB127EFC32F0023404A /* ProfileView.swift in Sources */,
+				17C0CBB627EFC5DB0023404A /* TabHandlerView.swift in Sources */,
+				17C0CBA227EFB6CB0023404A /* ImageView.swift in Sources */,
+				17C0CBAE27EFB75E0023404A /* GlobalChatView.swift in Sources */,
 				17FCDC6027E2820900D34564 /* ContentView.swift in Sources */,
 				17FCDC5E27E2820900D34564 /* MessengerApp.swift in Sources */,
+				17C0CBAA27EFB7150023404A /* ChatBubble.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,10 +336,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Messenger/Messenger.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Messenger/Preview Content\"";
-				DEVELOPMENT_TEAM = 647P3WJ9D5;
+				DEVELOPMENT_TEAM = 6SB9AZP69F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -295,10 +366,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Messenger/Messenger.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Messenger/Preview Content\"";
-				DEVELOPMENT_TEAM = 647P3WJ9D5;
+				DEVELOPMENT_TEAM = 6SB9AZP69F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
