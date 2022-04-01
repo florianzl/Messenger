@@ -20,6 +20,8 @@ struct ProfileView: View {
                 
                 Button {
                     Text("kommt noch")
+                        .fontWeight(.heavy)
+                        .padding()
                     
                 } label: {
                     

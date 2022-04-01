@@ -39,6 +39,12 @@ struct GlobalChatView: View {
                     ScrollView {
                         
                         VStack(spacing: 15) {
+                            Text("test")
+                            Text("test")
+                            Text("test")
+                            Text("test")
+                            Text("test")
+                            
                             /*
                             ForEach(homeData.msgs) {msg in
                                 ChatRow(chatData: msg)
@@ -52,9 +58,9 @@ struct GlobalChatView: View {
                             }
                             .onChange(of: homeData.msgs) { value in
                                 reader.scrollTo(homeData.msgs.last!.id, anchor: .bottom)
-                            }
+                            }*/
                         }
-                        .padding(.vertical)*/
+                        .padding(.vertical)
                     }
                 }
                 
@@ -91,11 +97,10 @@ struct GlobalChatView: View {
             .ignoresSafeArea(.all, edges: .top)
     }
 }
-}
+
 
 struct GlobalChatView_Previews: PreviewProvider {
     static var previews: some View {
         GlobalChatView()
-            .preferredColorScheme(.dark)
     }
 }
