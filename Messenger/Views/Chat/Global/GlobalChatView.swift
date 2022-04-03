@@ -14,84 +14,19 @@ extension UIApplication {
     }
 }
 
+
 struct GlobalChatView: View {
+    
     @State var tmp = ""
+    @StateObject private var ckMessageVM = CKGlobalChatModel()
     
     var body: some View {
         
             VStack {
                 
-                HStack {
-                    
-                    Text("Global Chat")
-                        .font(.title)
-                        .fontWeight(.heavy)
-                        .foregroundColor(.white)
-                    
-                    Spacer(minLength: 0)
-                }
-                .padding()
-                .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top)
-                .background(Color("accentColor").opacity(0.4))
-                
-                ScrollViewReader {reader in
-                    
-                    ScrollView {
-                        
-                        VStack(spacing: 15) {
-                            Text("test")
-                            Text("test")
-                            Text("test")
-                            Text("test")
-                            Text("test")
-                            
-                            /*
-                            ForEach(homeData.msgs) {msg in
-                                ChatRow(chatData: msg)
-                                    .onAppear {
-                                        if msg.id == self.homeData.msgs.last!.id && scrolled {
-                                            
-                                            reader.scrollTo(homeData.msgs.last!.id, anchor: .bottom)
-                                            scrolled = true
-                                        }
-                                    }
-                            }
-                            .onChange(of: homeData.msgs) { value in
-                                reader.scrollTo(homeData.msgs.last!.id, anchor: .bottom)
-                            }*/
-                        }
-                        .padding(.vertical)
-                    }
-                }
-                
-                HStack(spacing: 15) {
-                    
-                    TextField("Enter Message", text: $tmp) {
-                        if true { //check if message != ""
-                            //send message
-                            UIApplication.shared.endEditing()
-                        }
-                    }
-                        .padding(.horizontal)
-                        .frame(height: 45)
-                        .background(Color.primary.opacity(0.06))
-                        .clipShape(Capsule())
-                    
-                    if true { //check if message != ""
-                        Button {
-                            //send message
-                        } label: {
-                            Image(systemName: "paperplane.fill")
-                                .font(.system(size: 22))
-                                .foregroundColor(.white)
-                                .frame(width: 45, height: 45)
-                                .background(Color("accentColor"))
-                                .clipShape(Circle())
-                        }
-
-                    }
-                }
-                .padding()
+                header
+                messages
+                input
             }
             .background(Color("backgroundColor"))
             .ignoresSafeArea(.all, edges: .top)
@@ -102,5 +37,57 @@ struct GlobalChatView: View {
 struct GlobalChatView_Previews: PreviewProvider {
     static var previews: some View {
         GlobalChatView()
+    }
+}
+
+
+extension GlobalChatView {
+    private var header: some View {
+        HStack {
+            
+            Text("Global Chat")
+                .font(.title)
+                .fontWeight(.heavy)
+                .foregroundColor(.white)
+            
+            Spacer(minLength: 0)
+        }
+        .padding()
+        .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top)
+        .background(Color("accentColor").opacity(0.4))
+    }
+    
+    private var messages: some View {
+        VStack {
+            List {
+                ForEach(ckMessageVM.messages, id: \.self) {
+                    Text($0)
+                }
+            }
+        }
+    }
+    
+    private var input: some View {
+        HStack(spacing: 15) {
+            
+            TextField("Enter Message", text: $ckMessageVM.text)
+                .padding(.horizontal)
+                .frame(height: 45)
+                .background(Color.primary.opacity(0.06))
+                .clipShape(Capsule())
+            
+            Button {
+                ckMessageVM.addButtonPressed()
+                UIApplication.shared.endEditing()
+            } label: {
+                Image(systemName: "paperplane.fill")
+                    .font(.system(size: 22))
+                    .foregroundColor(.white)
+                    .frame(width: 45, height: 45)
+                    .background(Color("accentColor"))
+                    .clipShape(Circle())
+            }
+        }
+        .padding()
     }
 }

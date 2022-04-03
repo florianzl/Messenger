@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct TabHandlerView: View {
+    
+    @StateObject private var ckUser = CKUserModel()
+    
     var body: some View {
         TabView {
             

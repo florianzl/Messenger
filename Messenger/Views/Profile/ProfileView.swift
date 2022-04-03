@@ -12,28 +12,22 @@ struct ProfileView: View {
     func nothing() {
         
     }
+    
+    @StateObject private var ckUser = CKUserModel()
+    
     var body: some View {
         VStack(spacing: 40) {
             
             VStack(spacing: 15) {
                 ImageView()
                 
-                Button {
-                    Text("kommt noch")
-                        .fontWeight(.heavy)
-                        .padding()
-                    
+                Menu {
+                    Button("Foto aufnehmen", action: nothing)
+                    Button("Foto auswählen", action: nothing)
+                    Button("Foto löschen", action: nothing)
                 } label: {
-                    
-                    Menu("change") {
-                        Button("Foto aufnehmen", action: nothing)
-                        Button("Foto auswählen", action: nothing)
-                        Button("Foto löschen", action: nothing)
-
-                    }/*
-                    .fontWeight(.bold)
-                    .foregroundColor(.blue)
-                      */
+                    Text("change")
+                        .fontWeight(.bold)
                 }
             }
             
@@ -41,7 +35,7 @@ struct ProfileView: View {
             VStack(spacing: 15){
                 
                 HStack {
-                    Text("userName")
+                    Text(ckUser.userName)
                         .padding(.horizontal)
                         .frame(width: 300, height: 45, alignment: .leading)
                         .foregroundColor(.gray)
