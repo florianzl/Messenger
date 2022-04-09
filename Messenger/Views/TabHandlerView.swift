@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct TabHandlerView: View {
     
@@ -14,7 +15,7 @@ struct TabHandlerView: View {
     var body: some View {
         TabView {
             
-            GlobalChatView()
+            GlobalChatView(vm: GlobalChatModel(container: CKContainer.default()))
                 .tabItem {
                     Image(systemName: "globe.americas")
                     Text("Global Chat")

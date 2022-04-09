@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 //hide keyboard
 extension UIApplication {
@@ -18,7 +19,12 @@ extension UIApplication {
 struct GlobalChatView: View {
     
     @State var tmp = ""
-    @StateObject private var ckMessageVM = CKGlobalChatModel()
+    @StateObject private var vm: GlobalChatModel
+    @State var content: String = ""
+    
+    init(vm: GlobalChatModel) {
+        _vm = StateObject(wrappedValue: vm)
+    }
     
     var body: some View {
         
@@ -28,6 +34,9 @@ struct GlobalChatView: View {
                 messages
                 input
             }
+            .onAppear {
+                vm.fetchMessages()
+            }
             .background(Color("backgroundColor"))
             .ignoresSafeArea(.all, edges: .top)
     }
@@ -36,7 +45,7 @@ struct GlobalChatView: View {
 
 struct GlobalChatView_Previews: PreviewProvider {
     static var previews: some View {
-        GlobalChatView()
+        GlobalChatView(vm: GlobalChatModel(container: CKContainer.default()))
     }
 }
 
@@ -60,8 +69,8 @@ extension GlobalChatView {
     private var messages: some View {
         VStack {
             List {
-                ForEach(ckMessageVM.messages, id: \.self) {
-                    Text($0)
+                ForEach(vm.messages, id:\.recordId) { message in
+                    Text(message.content)
                 }
             }
         }
@@ -70,15 +79,18 @@ extension GlobalChatView {
     private var input: some View {
         HStack(spacing: 15) {
             
-            TextField("Enter Message", text: $ckMessageVM.text)
+            TextField("Enter Message", text: $content)
                 .padding(.horizontal)
                 .frame(height: 45)
                 .background(Color.primary.opacity(0.06))
                 .clipShape(Capsule())
             
             Button {
-                ckMessageVM.addButtonPressed()
-                UIApplication.shared.endEditing()
+                
+                vm.saveMessage(content: content)
+                
+                self.content = ""
+                
             } label: {
                 Image(systemName: "paperplane.fill")
                     .font(.system(size: 22))
@@ -87,6 +99,7 @@ extension GlobalChatView {
                     .background(Color("accentColor"))
                     .clipShape(Circle())
             }
+            .disabled(content.trimmingCharacters(in: .whitespaces).isEmpty)
         }
         .padding()
     }

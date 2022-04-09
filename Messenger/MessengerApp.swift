@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import CloudKit
+
 
 @main
 struct MessengerApp: App {
+    
+    //public container
+    let container = CKContainer(identifier: "iCloud.me.florianzitlau.IOSMessenger")
     
     var body: some Scene {
         WindowGroup {

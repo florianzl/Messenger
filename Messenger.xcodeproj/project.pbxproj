@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		170D7B4627ECE97E00E874C6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170D7B4527ECE97E00E874C6 /* CloudKit.framework */; };
+		174316CF28021AF50001DC2E /* GlobalMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174316CE28021AF50001DC2E /* GlobalMessages.swift */; };
 		17C0B75D27F8BA190017ECEE /* CKUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0B75C27F8BA190017ECEE /* CKUserModel.swift */; };
-		17C0B75F27F9B3410017ECEE /* CKGlobalChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0B75E27F9B3410017ECEE /* CKGlobalChatModel.swift */; };
+		17C0B75F27F9B3410017ECEE /* GlobalChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0B75E27F9B3410017ECEE /* GlobalChatModel.swift */; };
 		17C0CBA227EFB6CB0023404A /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0CBA127EFB6CB0023404A /* ImageView.swift */; };
 		17C0CBAA27EFB7150023404A /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0CBA927EFB7150023404A /* ChatBubble.swift */; };
 		17C0CBAC27EFB71E0023404A /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0CBAB27EFB71E0023404A /* ChatRow.swift */; };
@@ -25,8 +26,9 @@
 /* Begin PBXFileReference section */
 		170D7B4327ECE94200E874C6 /* Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Messenger.entitlements; sourceTree = "<group>"; };
 		170D7B4527ECE97E00E874C6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		174316CE28021AF50001DC2E /* GlobalMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMessages.swift; sourceTree = "<group>"; };
 		17C0B75C27F8BA190017ECEE /* CKUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKUserModel.swift; sourceTree = "<group>"; };
-		17C0B75E27F9B3410017ECEE /* CKGlobalChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKGlobalChatModel.swift; sourceTree = "<group>"; };
+		17C0B75E27F9B3410017ECEE /* GlobalChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalChatModel.swift; sourceTree = "<group>"; };
 		17C0CBA127EFB6CB0023404A /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		17C0CBA927EFB7150023404A /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		17C0CBAB27EFB71E0023404A /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
@@ -60,11 +62,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		174316CD28021ADD0001DC2E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				174316CE28021AF50001DC2E /* GlobalMessages.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		17C0B75B27F8B4530017ECEE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				17C0B75C27F8BA190017ECEE /* CKUserModel.swift */,
-				17C0B75E27F9B3410017ECEE /* CKGlobalChatModel.swift */,
+				17C0B75E27F9B3410017ECEE /* GlobalChatModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -127,6 +137,7 @@
 		17FCDC5C27E2820900D34564 /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				174316CD28021ADD0001DC2E /* Models */,
 				17C0B75B27F8B4530017ECEE /* ViewModels */,
 				17C0CBA027EFB66E0023404A /* Views */,
 				170D7B4327ECE94200E874C6 /* Messenger.entitlements */,
@@ -223,8 +234,9 @@
 				17FCDC6027E2820900D34564 /* ContentView.swift in Sources */,
 				17FCDC5E27E2820900D34564 /* MessengerApp.swift in Sources */,
 				17C0B75D27F8BA190017ECEE /* CKUserModel.swift in Sources */,
-				17C0B75F27F9B3410017ECEE /* CKGlobalChatModel.swift in Sources */,
+				17C0B75F27F9B3410017ECEE /* GlobalChatModel.swift in Sources */,
 				17C0CBAA27EFB7150023404A /* ChatBubble.swift in Sources */,
+				174316CF28021AF50001DC2E /* GlobalMessages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +381,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.florianzitlau.Chat;
+				PRODUCT_BUNDLE_IDENTIFIER = me.florianzitlau.IOSMessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -399,7 +411,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.florianzitlau.Chat;
+				PRODUCT_BUNDLE_IDENTIFIER = me.florianzitlau.IOSMessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
