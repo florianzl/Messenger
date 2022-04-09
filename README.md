@@ -6,4 +6,5 @@ Um den Namen und die Email Adresse aus der Apple-ID zu verwenden, muss beim erst
 Wenn dies nicht erlaubt wird, kann man nur ohne einen Namen Nachrichten verschicken und Freunde können einen nicht finden.
 
 
+
 Link zum Downloaden aus dem AppStore bald verfügbar
