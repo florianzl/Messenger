@@ -21,17 +21,12 @@ struct TabHandlerView: View {
                     Text("Global Chat")
                 }
             
-            Text("privat chats coming soon")
+            Text("private chats coming soon")
                 .tabItem {
                     Image(systemName: "message")
                     Text("Chats")
                 }
             
-            ProfileView()
-                .tabItem {
-                    Image(systemName: "person.crop.circle")
-                    Text("Profile")
-                }
         }
     }
 }

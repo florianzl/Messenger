@@ -18,8 +18,8 @@ extension UIApplication {
 
 struct GlobalChatView: View {
     
-    @State var tmp = ""
     @StateObject private var vm: GlobalChatModel
+    @StateObject private var ckUser = CKUserModel()
     @State var content: String = ""
     
     init(vm: GlobalChatModel) {
@@ -34,7 +34,7 @@ struct GlobalChatView: View {
                 messages
                 input
             }
-            .onAppear {
+            .onReceive(vm.$messages) { _ in
                 vm.fetchMessages()
             }
             .background(Color("backgroundColor"))
@@ -67,12 +67,54 @@ extension GlobalChatView {
     }
     
     private var messages: some View {
-        VStack {
-            List {
-                ForEach(vm.messages, id:\.recordId) { message in
-                    Text(message.content)
+        ScrollViewReader { reader in
+            
+            ScrollView {
+                VStack(spacing: 15) {
+                    ForEach(vm.messages, id:\.recordId) { message in
+                        HStack {
+                            
+                            if let username = vm.messages.last?.username {
+                                if username == ckUser.userName {
+                                    Spacer()
+                                }
+                            }
+                            
+                            VStack(alignment: .leading) {
+                                Text(message.username)
+                                    .foregroundColor(Color.purple)
+                                    .font(.system(size: 20))
+                                Text(message.content)
+                                    .font(.system(size: 20))
+                                
+                            }
+                            .padding([.top, .bottom], 7)
+                            .padding(.horizontal)
+                            .background(Color.gray.opacity(0.4))
+                            .clipShape(ChatBubble(ourMsg: true))
+                            
+                            if let username = vm.messages.last?.username {
+                                if username != ckUser.userName {
+                                    Spacer()
+                                }
+                            }
+                            
+                            VStack {
+                                Spacer()
+                                Text(message.timestamp, style: .time)
+                                    .fontWeight(.thin)
+                                    .font(.system(size: 15))
+                                    .padding(.bottom, 7)
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                    .onReceive(vm.$messages) { _ in
+                        reader.scrollTo(vm.messages.last?.recordId)
+                    }
                 }
             }
+            
         }
     }
     
@@ -87,7 +129,7 @@ extension GlobalChatView {
             
             Button {
                 
-                vm.saveMessage(content: content)
+                vm.saveMessage(content: content, username: ckUser.userName, timestamp: Date())
                 
                 self.content = ""
                 

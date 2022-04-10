@@ -24,10 +24,10 @@ class GlobalChatModel: ObservableObject {
         self.database = self.container.publicCloudDatabase
     }
     
-    func saveMessage(content: String) {
+    func saveMessage(content: String, username: String, timestamp: Date) {
         
         let record = CKRecord(recordType: RecordType.globalMessages.rawValue)
-        let globalMessage = GlobalMessages(content: content)
+        let globalMessage = GlobalMessages(content: content, username: username, timestamp: timestamp)
         record.setValuesForKeys(globalMessage.toDictionary())
         
         //saving record in database
@@ -51,6 +51,7 @@ class GlobalChatModel: ObservableObject {
         var messages: [GlobalMessages] = []
         
         let query = CKQuery(recordType: RecordType.globalMessages.rawValue, predicate: NSPredicate(value: true))
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         
         database.fetch(withQuery: query) { result in
             switch result {
@@ -59,7 +60,6 @@ class GlobalChatModel: ObservableObject {
                     .forEach {
                         switch $0 {
                         case .success(let record):
-                            print(record)
                             if let globalMessage = GlobalMessages.fromRecord(record) {
                                 messages.append(globalMessage)
                             }
@@ -91,90 +91,13 @@ struct GlobalMessageModel {
     var content: String {
         globalMessages.content
     }
+    
+    var username: String {
+        globalMessages.username
+    }
+    
+    var timestamp: Date {
+        globalMessages.timestamp
+    }
 }
 
-
-/*
-class CKGlobalChatModel: ObservableObject {
-    
-    @Published var text: String = ""
-    @Published var messages: [String] = []
-    let publicDatabase = CKContainer.default().publicCloudDatabase
-    
-    init() {
-        fetchGlobalMessages()
-    }
-    
-    func addButtonPressed() {
-        guard !text.isEmpty else {return}
-        addGlobalMessage(content: text)
-    }
-    
-    private func addGlobalMessage(content: String) {
-        let newGlobalMessage = CKRecord(recordType: "GlobalMessages")
-        newGlobalMessage["content"] = content
-        saveGlobalMessage(record: newGlobalMessage)
-    }
-    
-    private func saveGlobalMessage(record: CKRecord) {
-        publicDatabase.save(record) { [weak self] returnedRecord, returnedError in
-            print("Record: \(String(describing: returnedRecord))")
-            print("Error: \(String(describing: returnedError))")
-            
-            DispatchQueue.main.async {
-                self?.text = ""
-            }
-            
-        }
-    }
-    
-    private func fetchGlobalMessages() {
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "GlobalMessages", predicate: predicate)
-        let queryOperation = CKQueryOperation(query: query)
-        
-        var returnedItems: [String] = []
-        
-        if #available(iOS 15.0, *) {
-            queryOperation.recordMatchedBlock = { (returnedRecordID, returnedResult) in
-                switch returnedResult {
-                case .success(let record):
-                    print("success")
-                    guard let content = record["content"] as? String else {return}
-                    returnedItems.append(content)
-                case .failure(let error):
-                    print("Error recordMatchedBlock: \(error)")
-                }
-            }
-        } else {
-            queryOperation.recordFetchedBlock = { record in
-                guard let content = record["content"] as? String else {return}
-                returnedItems.append(content)
-            }
-        }
-        
-        if #available(iOS 15.0, *) {
-            queryOperation.queryResultBlock = { [weak self] returnedResult in 
-                DispatchQueue.main.async {
-                    switch returnedResult {
-                    case .success(_):
-                        print("query was successful")
-                        self?.messages = returnedItems
-                    case .failure(_):
-                        print("error")
-                    }
-                }
-            }
-        } else {
-            queryOperation.queryCompletionBlock = { [weak self] (returnedCursor, returnedError) in
-                print("returned queryCompletionBlock")
-                DispatchQueue.main.async {
-                    self?.messages = returnedItems
-                }
-            }
-        }
-        
-        print(messages)
-        
-    }
-}*/

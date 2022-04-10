@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct ChatBubble: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct ChatBubble_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatBubble()
+struct ChatBubble: Shape {
+    var ourMsg: Bool
+    
+    func path(in rect: CGRect)-> Path {
+        
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft, .topRight, ourMsg ? .bottomLeft : .bottomRight], cornerRadii: CGSize(width: 15, height: 15))
+        
+        return Path(path.cgPath)
     }
 }

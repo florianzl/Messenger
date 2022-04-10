@@ -11,6 +11,7 @@ import CloudKit
 class CKUserModel: ObservableObject {
     
     @Published var userName: String = ""
+    @Published var id: String = ""
     let container = CKContainer.default()
     
     init() {
@@ -43,6 +44,9 @@ class CKUserModel: ObservableObject {
             DispatchQueue.main.async {
                 if let name = identity?.nameComponents?.givenName {
                     self.userName = name
+                }
+                if let id = identity?.userRecordID?.recordName {
+                    self.id = id
                 }
             }
         }
