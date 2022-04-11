@@ -14,10 +14,14 @@ struct MessengerApp: App {
     
     //public container
     let container = CKContainer(identifier: "iCloud.me.florianzitlau.IOSMessenger")
+    @StateObject private var notifications = PushNotificationsModel()
     
     var body: some Scene {
         WindowGroup {
             TabHandlerView()
+                .onAppear {
+                    notifications.requestPermissions()
+                }
         }
     }
 }

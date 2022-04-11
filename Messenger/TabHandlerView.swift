@@ -24,7 +24,7 @@ struct TabHandlerView: View {
             Text("private chats coming soon")
                 .tabItem {
                     Image(systemName: "message")
-                    Text("Chats")
+                    Text("Private Chats")
                 }
             
         }

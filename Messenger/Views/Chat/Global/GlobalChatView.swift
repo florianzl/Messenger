@@ -22,9 +22,17 @@ struct GlobalChatView: View {
     @StateObject private var ckUser = CKUserModel()
     @State var content: String = ""
     
+    func color(username: String) -> Color {
+        if username == ckUser.userName {
+            return .accentColor
+        }
+        return .purple
+    }
+    
     init(vm: GlobalChatModel) {
         _vm = StateObject(wrappedValue: vm)
     }
+    
     
     var body: some View {
         
@@ -74,15 +82,22 @@ extension GlobalChatView {
                     ForEach(vm.messages, id:\.recordId) { message in
                         HStack {
                             
-                            if let username = vm.messages.last?.username {
-                                if username == ckUser.userName {
+                            if message.username == ckUser.userName {
+                                Spacer()
+                            }
+                            else {
+                                VStack {
                                     Spacer()
+                                    Text(message.timestamp, style: .time)
+                                        .fontWeight(.thin)
+                                        .font(.system(size: 15))
+                                        .padding(.bottom, 7)
                                 }
                             }
                             
                             VStack(alignment: .leading) {
                                 Text(message.username)
-                                    .foregroundColor(Color.purple)
+                                    .foregroundColor(color(username: message.username))
                                     .font(.system(size: 20))
                                 Text(message.content)
                                     .font(.system(size: 20))
@@ -91,21 +106,22 @@ extension GlobalChatView {
                             .padding([.top, .bottom], 7)
                             .padding(.horizontal)
                             .background(Color.gray.opacity(0.4))
-                            .clipShape(ChatBubble(ourMsg: true))
+                            .clipShape(ChatBubble(ourMsg: message.username == ckUser.userName))
                             
-                            if let username = vm.messages.last?.username {
-                                if username != ckUser.userName {
+                            if message.username != ckUser.userName {
+                                Spacer()
+                            }
+                            else {
+                                VStack {
                                     Spacer()
+                                    Text(message.timestamp, style: .time)
+                                        .fontWeight(.thin)
+                                        .font(.system(size: 15))
+                                        .padding(.bottom, 7)
                                 }
                             }
                             
-                            VStack {
-                                Spacer()
-                                Text(message.timestamp, style: .time)
-                                    .fontWeight(.thin)
-                                    .font(.system(size: 15))
-                                    .padding(.bottom, 7)
-                            }
+                            
                         }
                         .padding(.horizontal)
                     }
